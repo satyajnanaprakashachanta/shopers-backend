@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: shopers
+
+  datasource:
+    # Use a stable in‑memory DB name so H2 doesn't randomize it
+    url: jdbc:h2:mem:shopersdb;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    # This flag is for Spring Boot's auto-naming; keep it off when you supply a URL
+    generate-unique-name: false
+    name: shopersdb
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    # Make Hibernate create tables first, then run data.sql
+    defer-datasource-initialization: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+# CORS Configuration
+cors:
+  allowed-origins: http://localhost:3000,http://localhost:3001
+
+# JWT Configuration
+jwt:
+  secret: myVerySecretJWTKeyThatIsAtLeast256BitsLongForHS256Algorithm
+  expiration: 86400 # 24 hours in seconds
+
+# Springdoc Swagger UI default works at /swagger-ui/index.html
