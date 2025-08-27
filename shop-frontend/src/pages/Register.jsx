@@ -13,14 +13,26 @@ export default function Register() {
     setLoading(true);
     
     try {
-      await api.post("/auth/register", {
+      console.log("Attempting registration with:", { email }); // Debug log
+      const res = await api.post("/auth/register", {
         email,
         password,
       });
+      console.log("Registration response:", res.data); // Debug log
       alert("Registered successfully!");
       navigate("/login");
     } catch (err) {
-      alert("Registration failed!");
+      console.error("Registration error:", err); // Debug log
+      if (err.response) {
+        // Server responded with error status
+        alert(`Registration failed: ${err.response.data || err.response.status}`);
+      } else if (err.request) {
+        // Request was made but no response received
+        alert("Registration failed: Cannot connect to server. Please check if backend is running.");
+      } else {
+        // Something else happened
+        alert(`Registration failed: ${err.message}`);
+      }
     } finally {
       setLoading(false);
     }

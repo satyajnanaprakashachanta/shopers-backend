@@ -13,15 +13,27 @@ export default function Login() {
     setLoading(true);
     
     try {
+      console.log("Attempting login with:", { email }); // Debug log
       const res = await api.post("/auth/login", {
         email,
         password,
       });
+      console.log("Login response:", res.data); // Debug log
       localStorage.setItem("token", res.data.token);
       alert("Login successful!");
       navigate("/dashboard");
     } catch (err) {
-      alert("Login failed!");
+      console.error("Login error:", err); // Debug log
+      if (err.response) {
+        // Server responded with error status
+        alert(`Login failed: ${err.response.data || err.response.status}`);
+      } else if (err.request) {
+        // Request was made but no response received
+        alert("Login failed: Cannot connect to server. Please check if backend is running.");
+      } else {
+        // Something else happened
+        alert(`Login failed: ${err.message}`);
+      }
     } finally {
       setLoading(false);
     }
