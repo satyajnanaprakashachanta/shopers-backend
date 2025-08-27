@@ -1,7 +1,6 @@
 com/shopers/auth/AuthController.class
 com/shopers/auth/JwtUtil.class
 com/shopers/product/Product.class
-com/shopers/order/OrderLineResponse$OrderLineResponseBuilder.class
 com/shopers/config/SecurityConfig.class
 com/shopers/auth/LoginRequest.class
 com/shopers/common/ApiExceptionHandler.class
@@ -18,9 +17,6 @@ com/shopers/product/ProductService.class
 com/shopers/config/CorsConfig.class
 com/shopers/product/ProductController.class
 com/shopers/common/HealthController.class
-com/shopers/order/OrderLineResponse.class
 com/shopers/product/ProductNotFoundException.class
 com/shopers/product/ProductRepository.class
-com/shopers/order/OrderResponse$OrderResponseBuilder.class
-com/shopers/order/OrderResponse.class
 com/shopers/auth/LoginResponse.class
