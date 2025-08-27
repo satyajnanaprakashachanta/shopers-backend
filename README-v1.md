@@ -40,7 +40,7 @@ A full-stack e-commerce platform built with Spring Boot backend and React fronte
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/shopers-backend.git
+   git clone https://github.com/satyajnanaprakashachanta/shopers-backend.git
    cd shopers-backend
    ```
 
