@@ -13,14 +13,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        
-        // If database is empty, return sample data for frontend testing
-        if (products.isEmpty()) {
-            return getSampleProducts();
-        }
-        
-        return products;
+        return productRepository.findAll();
     }
 
     public Product getProductById(Long id) {
@@ -48,6 +41,15 @@ public class ProductService {
     public void deleteProduct(Long id) {
         Product product = getProductById(id);
         productRepository.delete(product);
+    }
+
+    public void clearAndLoadSampleProducts() {
+        // Clear all existing products
+        productRepository.deleteAll();
+        
+        // Load clean sample products
+        List<Product> sampleProducts = getSampleProducts();
+        productRepository.saveAll(sampleProducts);
     }
 
     private List<Product> getSampleProducts() {

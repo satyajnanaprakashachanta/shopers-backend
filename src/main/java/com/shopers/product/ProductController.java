@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-@CrossOrigin(origins = "http://localhost:3001")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://localhost:3002"})
 @RequiredArgsConstructor
 public class ProductController {
 
@@ -41,5 +41,11 @@ public class ProductController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/clear-and-load")
+    public ResponseEntity<String> clearAndLoadProducts() {
+        productService.clearAndLoadSampleProducts();
+        return ResponseEntity.ok("Products cleared and sample products loaded successfully!");
     }
 }
