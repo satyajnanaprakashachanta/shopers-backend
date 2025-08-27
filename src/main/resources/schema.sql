@@ -21,6 +21,25 @@ CREATE TABLE IF NOT EXISTS products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Orders table (if not exists)
+CREATE TABLE IF NOT EXISTS orders (
+    id BIGSERIAL PRIMARY KEY,
+    user_email VARCHAR(255) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Order lines table (if not exists)
+CREATE TABLE IF NOT EXISTS order_lines (
+    id BIGSERIAL PRIMARY KEY,
+    order_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    quantity INTEGER NOT NULL,
+    price_each DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
 -- Insert sample products if table is empty
 INSERT INTO products (name, description, price, image_url, stock, category) 
 SELECT * FROM (VALUES
