@@ -54,7 +54,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(applicationContext.getBean("corsConfigurationSource", org.springframework.web.cors.CorsConfigurationSource.class)))
+            .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz
@@ -68,7 +68,6 @@ public class SecurityConfig {
                 ).permitAll()
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(applicationContext.getBean(JwtAuthenticationFilter.class), UsernamePasswordAuthenticationFilter.class)
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
 
         return http.build();
